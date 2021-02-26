@@ -2,7 +2,7 @@
 //  SingleForecast.m
 //  UxCamTest
 //
-//  Created by Javra Software on 2/26/21.
+//  Created by Ravi Bastola on 2/26/21.
 //
 
 #import "SingleForecast.h"

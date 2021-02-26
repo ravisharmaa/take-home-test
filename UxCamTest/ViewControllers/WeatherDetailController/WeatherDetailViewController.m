@@ -13,6 +13,9 @@
 #import "Constants.h"
 #import "WeeklyWeather.h"
 #import "SingleForecast.h"
+#import "CompositionalLayoutsHelper.h"
+#import "ImageMapper.h"
+
 @import JGProgressHUD;
 
 @interface WeatherDetailViewController ()
@@ -37,12 +40,17 @@
 
 @property (nonatomic, strong) NSMutableArray<Section *> *sectionArray;
 
+@property (nonatomic, strong) UIImageView *highImageView;
+
+@property (nonatomic, strong) UIImageView *lowImageView;
+
+@property (nonatomic, strong) UIImageView *iconImageView;
+
 @property SingleForecast *foreCast;
 
 @property NSMutableArray * weatherDataArray;
 
 @end
-
 
 @implementation WeatherDetailViewController
 
@@ -52,6 +60,8 @@
     }
     return  self;
 }
+
+
 
 - (void)viewDidLoad {
     
@@ -66,13 +76,108 @@
     [self configureViews];
     
     [self getData];
+    
+    [self configureLabels];
+    
+    [self.searchView.goButton addTarget:self action:@selector(handleTap) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void) handleTap {
+    if (self.searchView.searchTextField.text.length > 3) {
+        self.cityName = self.searchView.searchTextField.text;
+        [self getData];
+    }
+}
+
+- (void) configureLabels {
+    
+    self.cityLabel = [[UILabel alloc] init];
+    self.cityLabel.text = @"__";
+    [self.cityLabel setFont:[UIFont systemFontOfSize:45]];
+    [self.cityLabel setTextColor:UIColor.systemBackgroundColor];
+    
+    
+    self.feelsLikeLabel = [[UILabel alloc] init];
+    self.feelsLikeLabel.text = @"__";
+    [self.feelsLikeLabel setFont:[UIFont boldSystemFontOfSize:20]];
+    [self.feelsLikeLabel setTextColor:UIColor.systemBackgroundColor];
+    
+    UIImage *image = [UIImage imageNamed:@"weather-moon"];
+    self.iconImageView = [[UIImageView alloc] initWithImage:image];
+    self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    UIImage *highImage = [[UIImage systemImageNamed:@"arrow.up"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.highImageView = [[UIImageView alloc] initWithImage:highImage];
+    [self.highImageView setTintColor:UIColor.whiteColor];
+    self.highImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.highImageView.heightAnchor constraintEqualToConstant:15].active = YES;
+    [self.highImageView.widthAnchor constraintEqualToConstant:15].active = YES;
+    
+    UIImage *lowImage = [[UIImage systemImageNamed:@"arrow.down"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.lowImageView = [[UIImageView alloc] initWithImage:lowImage];
+    [self.lowImageView setTintColor:UIColor.whiteColor];
+    self.lowImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.lowImageView.heightAnchor constraintEqualToConstant:15].active = YES;
+    [self.lowImageView.widthAnchor constraintEqualToConstant:15].active = YES;
+    
+    self.highLabel = [[UILabel alloc] init];
+    self.highLabel.text = @"__";
+    [self.highLabel setFont:[UIFont systemFontOfSize:18]];
+    [self.highLabel setTextColor:UIColor.systemBackgroundColor];
+    
+    self.lowLabel = [[UILabel alloc] init];
+    self.lowLabel.text = @"__";
+    [self.lowLabel setFont:[UIFont systemFontOfSize:18]];
+    [self.lowLabel setTextColor:UIColor.systemBackgroundColor];
+    
+    self.tempratureLabel = [[UILabel alloc] init];
+    self.tempratureLabel.text = @"__";
+    [self.tempratureLabel setFont:[UIFont systemFontOfSize:100]];
+    [self.tempratureLabel setTextColor:UIColor.systemBackgroundColor];
+    
+    
+#pragma mark: - Embed labels in stack view
+    
+    
+    UIView *dummyView = [[UIView alloc] init];
+    
+    UIStackView *feelsLikeAndWeatherStack = [[UIStackView alloc] initWithArrangedSubviews:@[self.iconImageView, self.feelsLikeLabel, dummyView]];
+    feelsLikeAndWeatherStack.axis = UILayoutConstraintAxisHorizontal;
+    
+    UIStackView *highLowStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.highImageView, self.highLabel, self.lowImageView, self.lowLabel, dummyView]];
+    highLowStackView.axis = UILayoutConstraintAxisHorizontal;
+    
+    UIStackView *feelsLikeAndHighLowStack = [[UIStackView alloc] initWithArrangedSubviews:@[feelsLikeAndWeatherStack, highLowStackView]];
+    feelsLikeAndHighLowStack.axis = UILayoutConstraintAxisVertical;
+    
+    UIStackView *overAllStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.cityLabel, feelsLikeAndHighLowStack, self.tempratureLabel]];
+    overAllStackView.axis = UILayoutConstraintAxisVertical;
+    overAllStackView.alignment = UIStackViewAlignmentLeading;
+    overAllStackView.distribution = UIStackViewDistributionFillProportionally;
+    
+    [self.view addSubview:overAllStackView];
+    
+    overAllStackView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [overAllStackView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:200].active = YES;
+    [overAllStackView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:40].active = YES;
+    [overAllStackView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:-80].active = YES;
+    [overAllStackView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-300].active = YES;
+    
+    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void) getData {
+    
     NetworkManager *manager = [[NetworkManager alloc] init];
     
     self.weatherDataArray = [[NSMutableArray alloc] init];
@@ -104,13 +209,11 @@
         
         __weak typeof(self) weakSelf = self;
         
-
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             __strong typeof(self) strongSelf = weakSelf;
             [strongSelf configureDataSource];
-            
-            NSLog(@"%@", self.foreCast.weather);
-            
+            [strongSelf updateLabelsWith:self.foreCast];
             [hud dismiss];
         });
         
@@ -146,35 +249,7 @@
 
 - (void) configureViews {
     
-    NSCollectionLayoutDimension *itemWidth = [NSCollectionLayoutDimension fractionalWidthDimension:1];
-    
-    NSCollectionLayoutDimension *itemHeight = [NSCollectionLayoutDimension fractionalHeightDimension:1];
-    
-    NSCollectionLayoutSize *itemSize = [NSCollectionLayoutSize sizeWithWidthDimension:itemWidth heightDimension:itemHeight];
-    
-    NSCollectionLayoutItem *item = [NSCollectionLayoutItem itemWithLayoutSize:itemSize];
-    
-    item.contentInsets = NSDirectionalEdgeInsetsMake(5, 5, 0, 2);
-    
-    NSCollectionLayoutDimension *widthDimension = [NSCollectionLayoutDimension fractionalWidthDimension:0.2];
-    
-    NSCollectionLayoutDimension *heightDimension = [NSCollectionLayoutDimension absoluteDimension:80];
-    
-    NSCollectionLayoutSize *groupSize = [NSCollectionLayoutSize sizeWithWidthDimension:widthDimension heightDimension:heightDimension];
-    
-    
-    NSCollectionLayoutGroup *group = [NSCollectionLayoutGroup horizontalGroupWithLayoutSize:groupSize subitems:@[item]];
-    
-    NSCollectionLayoutSection *section = [NSCollectionLayoutSection sectionWithGroup:group];
-    
-    section.orthogonalScrollingBehavior = UICollectionLayoutSectionOrthogonalScrollingBehaviorContinuous;
-    
-    section.contentInsets = NSDirectionalEdgeInsetsMake(0, 20, 0, 0);
-    
-    UICollectionViewCompositionalLayout *layout = [[UICollectionViewCompositionalLayout alloc] initWithSection:section];
-    
-    
-    self.weeklyForecastView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    self.weeklyForecastView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[CompositionalLayoutsHelper weatherDetailLayout]];
     
     [_weeklyForecastView registerClass: CustomCollectionViewCell.class forCellWithReuseIdentifier:@"reuseMe"];
     
@@ -214,7 +289,6 @@
     
     Section *section = [[Section alloc] init];
     
-    section.name = @"main";
     
     [self.sectionArray addObject:section];
     
@@ -226,4 +300,12 @@
     
 }
 
+-(void) updateLabelsWith :(SingleForecast *)foreCast {
+    self.cityLabel.text = self.cityName;
+    self.highLabel.text = @(foreCast.maximumTemp).stringValue;
+    self.lowLabel.text = @(foreCast.minimumTemp).stringValue;
+    self.tempratureLabel.text = @(foreCast.currentTemp).stringValue;
+    self.feelsLikeLabel.text = foreCast.weather;
+    self.searchView.searchTextField.text = self.cityName;
+}
 @end

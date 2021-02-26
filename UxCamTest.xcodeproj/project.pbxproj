@@ -22,6 +22,8 @@
 		D582AC7025E90ADB00FBFAEA /* JGProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D582AC6B25E90ACE00FBFAEA /* JGProgressHUD.framework */; };
 		D582AC7125E90ADB00FBFAEA /* JGProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D582AC6B25E90ACE00FBFAEA /* JGProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D582AC7625E9111600FBFAEA /* SingleForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC7525E9111600FBFAEA /* SingleForecast.m */; };
+		D582AC7A25E91BD800FBFAEA /* CompositionalLayoutsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC7925E91BD800FBFAEA /* CompositionalLayoutsHelper.m */; };
+		D582AC7D25E9339D00FBFAEA /* ImageMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC7C25E9339D00FBFAEA /* ImageMapper.m */; };
 		D5AD2DAA25E4CFA600D7B7D0 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DA925E4CFA600D7B7D0 /* NetworkManager.m */; };
 		D5AD2DBC25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DBB25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m */; };
 		D5BEFB1C25E68D58001D9FF5 /* TextFieldAndButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BEFB1B25E68D58001D9FF5 /* TextFieldAndButtonView.m */; };
@@ -85,6 +87,10 @@
 		D582AC6525E90ACE00FBFAEA /* JGProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JGProgressHUD.xcodeproj; path = "../../../../Desktop/JGProgressHUD-master/JGProgressHUD.xcodeproj"; sourceTree = "<group>"; };
 		D582AC7425E9111600FBFAEA /* SingleForecast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleForecast.h; sourceTree = "<group>"; };
 		D582AC7525E9111600FBFAEA /* SingleForecast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleForecast.m; sourceTree = "<group>"; };
+		D582AC7825E91BD800FBFAEA /* CompositionalLayoutsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompositionalLayoutsHelper.h; sourceTree = "<group>"; };
+		D582AC7925E91BD800FBFAEA /* CompositionalLayoutsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompositionalLayoutsHelper.m; sourceTree = "<group>"; };
+		D582AC7B25E9339D00FBFAEA /* ImageMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageMapper.h; sourceTree = "<group>"; };
+		D582AC7C25E9339D00FBFAEA /* ImageMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageMapper.m; sourceTree = "<group>"; };
 		D5AD2DA825E4CFA600D7B7D0 /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		D5AD2DA925E4CFA600D7B7D0 /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		D5AD2DB725E4FB5200D7B7D0 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 		D559FCA425E3EA2300047031 /* UxCamTest */ = {
 			isa = PBXGroup;
 			children = (
+				D582AC7725E91BB900FBFAEA /* Helpers */,
 				D582AC5225E90A4000FBFAEA /* Libraries */,
 				D582AC3925E8AA2C00FBFAEA /* CollectionViewCells */,
 				D582AC3325E8A99400FBFAEA /* Sections */,
@@ -246,6 +253,17 @@
 				D582AC6D25E90ACE00FBFAEA /* JGProgressHUD.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D582AC7725E91BB900FBFAEA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D582AC7825E91BD800FBFAEA /* CompositionalLayoutsHelper.h */,
+				D582AC7925E91BD800FBFAEA /* CompositionalLayoutsHelper.m */,
+				D582AC7B25E9339D00FBFAEA /* ImageMapper.h */,
+				D582AC7C25E9339D00FBFAEA /* ImageMapper.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		D5AD2DA725E4CF8200D7B7D0 /* Manager */ = {
@@ -358,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D582AC7D25E9339D00FBFAEA /* ImageMapper.m in Sources */,
 				D559FCA725E3EA2300047031 /* AppDelegate.m in Sources */,
 				D559FCB825E3EA2800047031 /* main.m in Sources */,
 				D582AC3125E8963D00FBFAEA /* WeeklyWeather.m in Sources */,
@@ -369,6 +388,7 @@
 				D582AC7625E9111600FBFAEA /* SingleForecast.m in Sources */,
 				D5AD2DAA25E4CFA600D7B7D0 /* NetworkManager.m in Sources */,
 				D57A6EE925E6A62D00C75E8F /* WeatherDetailViewController.m in Sources */,
+				D582AC7A25E91BD800FBFAEA /* CompositionalLayoutsHelper.m in Sources */,
 				D559FCAA25E3EA2300047031 /* SceneDelegate.m in Sources */,
 				D5AD2DBC25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m in Sources */,
 				D54E507425E63A3B00886CC2 /* CustomTextField.m in Sources */,
