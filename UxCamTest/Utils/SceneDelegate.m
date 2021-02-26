@@ -22,7 +22,7 @@
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     _window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *) scene];
     
-    LandingViewController *landingVC = [[LandingViewController alloc] init];
+    WeatherDetailViewController *landingVC = [[WeatherDetailViewController alloc] initWithCityName:@"Kathmandu"];
     
     _window.rootViewController = [[UINavigationController alloc] initWithRootViewController:landingVC];
     

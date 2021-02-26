@@ -14,7 +14,7 @@
 #import "WeeklyWeather.h"
 #import "SingleForecast.h"
 #import "CompositionalLayoutsHelper.h"
-#import "ImageMapper.h"
+#import "UIViewController+AlertExtension.h"
 
 @import JGProgressHUD;
 
@@ -49,7 +49,6 @@
 @property SingleForecast *foreCast;
 
 @property NSMutableArray * weatherDataArray;
-
 @end
 
 @implementation WeatherDetailViewController
@@ -60,8 +59,6 @@
     }
     return  self;
 }
-
-
 
 - (void)viewDidLoad {
     
@@ -105,6 +102,9 @@
     UIImage *image = [UIImage imageNamed:@"weather-moon"];
     self.iconImageView = [[UIImageView alloc] initWithImage:image];
     self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.iconImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.iconImageView.heightAnchor constraintEqualToConstant:40].active = YES;
+    [self.iconImageView.widthAnchor constraintEqualToConstant:40].active = YES;
     
     UIImage *highImage = [[UIImage systemImageNamed:@"arrow.up"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.highImageView = [[UIImageView alloc] initWithImage:highImage];
@@ -162,7 +162,7 @@
     [overAllStackView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:200].active = YES;
     [overAllStackView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:40].active = YES;
     [overAllStackView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:-80].active = YES;
-    [overAllStackView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-300].active = YES;
+    [overAllStackView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-330].active = YES;
     
     
 }
@@ -190,6 +190,14 @@
     [manager getData:self.cityName needsHost:YES forURL:WEATHER_URL completion:^(NSDictionary * _Nonnull data, NSError * _Nonnull error) {
         if (error) {
             NSLog(@"%@", error);
+        }
+        
+        if ([data[@"message"] isEqualToString:@"city not found"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showAlertWith:@"Error" andMessage:@"City Not Found"];
+                [hud dismiss];
+            });
+           
         }
         
         self.foreCast = [[SingleForecast alloc] initWithDict:data];
@@ -226,6 +234,13 @@
     
     self.backgroundImageView = [[UIImageView alloc] initWithImage:parisImage];
     
+    CAGradientLayer *gradientMask = [CAGradientLayer layer];
+    gradientMask.frame = self.backgroundImageView.bounds;
+    gradientMask.colors = @[(id)[UIColor blackColor].CGColor,
+                            (id)[UIColor whiteColor].CGColor];
+    
+    self.backgroundImageView.layer.mask = gradientMask;
+    
     self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     [self.view addSubview: self.backgroundImageView];
@@ -242,8 +257,8 @@
     [self.view addSubview:self.searchView];
     
     [self.searchView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:20].active = YES;
-    [self.searchView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:20].active = YES;
-    [self.searchView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:-20].active = YES;
+    [self.searchView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:5].active = YES;
+    [self.searchView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:-5].active = YES;
     
 }
 
@@ -255,13 +270,16 @@
     
     [self.view addSubview:_weeklyForecastView];
     
-    self.weeklyForecastView.backgroundColor = UIColor.clearColor;
+    self.weeklyForecastView.backgroundColor = [UIColor.systemGrayColor  colorWithAlphaComponent:0.2];
+    
+    self.weeklyForecastView.layer.cornerRadius = 8;
+    
     
     _weeklyForecastView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.weeklyForecastView.heightAnchor constraintEqualToConstant:100].active = YES;
-    [self.weeklyForecastView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-60].active = YES;
-    [self.weeklyForecastView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor].active = YES;
+    [self.weeklyForecastView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-100].active = YES;
+    [self.weeklyForecastView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:8].active = YES;
     [self.weeklyForecastView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor].active = YES;
     
 }
@@ -273,9 +291,6 @@
         CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseMe" forIndexPath:indexPath];
         
         WeeklyWeather *weather = self.weatherDataArray[indexPath.item];
-        
-        NSLog(@"%@", [[@(weather.temp) stringValue] stringByAppendingString:@" C"]);
-        
         [cell configureWithWeather:weather];
         
         cell.layer.cornerRadius = 8;
@@ -302,9 +317,9 @@
 
 -(void) updateLabelsWith :(SingleForecast *)foreCast {
     self.cityLabel.text = self.cityName;
-    self.highLabel.text = @(foreCast.maximumTemp).stringValue;
-    self.lowLabel.text = @(foreCast.minimumTemp).stringValue;
-    self.tempratureLabel.text = @(foreCast.currentTemp).stringValue;
+    self.highLabel.text = [@(foreCast.maximumTemp).stringValue stringByAppendingString:@"°"];
+    self.lowLabel.text = [@(foreCast.minimumTemp).stringValue stringByAppendingString:@"°"];
+    self.tempratureLabel.text = [@(foreCast.currentTemp).stringValue stringByAppendingString:@"°"];
     self.feelsLikeLabel.text = foreCast.weather;
     self.searchView.searchTextField.text = self.cityName;
 }

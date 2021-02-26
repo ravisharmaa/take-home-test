@@ -23,7 +23,7 @@
     
     NSCollectionLayoutDimension *widthDimension = [NSCollectionLayoutDimension fractionalWidthDimension:0.2];
     
-    NSCollectionLayoutDimension *heightDimension = [NSCollectionLayoutDimension absoluteDimension:80];
+    NSCollectionLayoutDimension *heightDimension = [NSCollectionLayoutDimension absoluteDimension:90];
     
     NSCollectionLayoutSize *groupSize = [NSCollectionLayoutSize sizeWithWidthDimension:widthDimension heightDimension:heightDimension];
     

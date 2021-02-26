@@ -54,19 +54,49 @@
     
     self.weatherImage.translatesAutoresizingMaskIntoConstraints = false;
     
-    [self.weatherImage.centerYAnchor constraintEqualToAnchor:self.centerYAnchor].active = YES;
+    [self.weatherImage.topAnchor constraintEqualToAnchor:self.topAnchor constant:8].active = YES;
     [self.weatherImage.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
     
-    [self.weatherImage.heightAnchor constraintEqualToConstant:45].active = YES;
-    [self.weatherImage.widthAnchor constraintEqualToConstant:45].active = YES;
+    [self.weatherImage.heightAnchor constraintEqualToConstant:35].active = YES;
+    [self.weatherImage.widthAnchor constraintEqualToConstant:35].active = YES;
+    
+    self.dateLabel = [[UILabel alloc] init];
+    self.dateLabel.text = @"__";
+    [self.dateLabel setFont:[UIFont boldSystemFontOfSize:18]];
+    [self.dateLabel setTextColor:UIColor.systemBackgroundColor];
+    
+    [self addSubview:self.dateLabel];
+    self.dateLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.dateLabel.topAnchor constraintEqualToAnchor:self.weatherImage.bottomAnchor constant:1].active = YES;
+    [self.dateLabel.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
+    
+    self.timeLabel = [[UILabel alloc] init];
+    self.timeLabel.text = @"__";
+    [self.timeLabel setFont:[UIFont boldSystemFontOfSize:18]];
+    [self.timeLabel setTextColor:UIColor.systemBackgroundColor];
+    
+    [self addSubview:self.timeLabel];
+    self.timeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.timeLabel.topAnchor constraintEqualToAnchor:self.dateLabel.bottomAnchor constant:5].active = YES;
+    [self.timeLabel.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
     
     
 }
 
 - (void) configureWithWeather:(WeeklyWeather *)weather {
-    //NSLog(@"%@", self.imageMap[weather.icon]);
-     self.weatherImage.image = [UIImage imageNamed:self.imageMap[weather.icon]];
+    self.weatherImage.image = [UIImage imageNamed:self.imageMap[weather.icon]];
     self.weatherImage.contentMode = UIViewContentModeScaleAspectFill;
+    self.dateLabel.text = [@(weather.temp).stringValue stringByAppendingString:@"°"];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+     NSDate *date = [dateFormatter dateFromString:weather.time];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
+    NSInteger hour = [components hour];
+    self.timeLabel.text = [@(hour).stringValue stringByAppendingString:@":00"];
 }
 
 @end

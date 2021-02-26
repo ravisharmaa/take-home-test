@@ -26,8 +26,7 @@
     
     NSString *icon = dict[@"weather"][0][@"icon"];
     
-    NSString *time = dict[@"dt_text"];
-    
+    NSString *time = dict[@"dt_txt"];
     return [self initWithTemp:temp time:time andIcon:icon];
 }
 

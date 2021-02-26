@@ -42,7 +42,7 @@
 
 - (void) willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    [self.searchResultsTableView removeFromSuperview];
+   // [self.searchResultsTableView removeFromSuperview];
 }
 
 - (void)layoutSubviews {
@@ -61,30 +61,37 @@
 
 - (void) textFieldDidChange {
     
-    if (![self.text isEqualToString:@"" ]){
-        [self.citiesArray removeAllObjects];
-        [self getCountriesData];
-        [self updateTableView];
-    } else {
-        [self.citiesArray removeAllObjects];
-    }
+//    double delayInSeconds = 0.5;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        if (![self.text isEqualToString:@"" ]){
+//            [self.citiesArray removeAllObjects];
+//            [self.searchResultsTableView reloadData];
+//            [self getCountriesData];
+//            [self updateTableView];
+//        } else {
+//            [self.citiesArray removeAllObjects];
+//        }
+//    });
+
+    
 }
 
 - (void) textFieldDidBeginEditing {
-    if (self.citiesArray.count > 0) {
-        [self.citiesArray removeAllObjects];
-    }
-    [self buildSearchTableView];
+//    if (self.citiesArray.count > 0) {
+//        [self.citiesArray removeAllObjects];
+//    }
+//    [self buildSearchTableView];
 }
 
 - (void) textFieldEndEditing {
-    [self.searchResultsTableView setHidden:true];
-    //[self.citiesArray removeAllObjects];
-    [self.searchResultsTableView reloadData];
+//    [self.searchResultsTableView setHidden:true];
+//    //[self.citiesArray removeAllObjects];
+//    [self.searchResultsTableView reloadData];
 }
 
 - (void) textFieldEndEditingOnExit {
-    [self.searchResultsTableView setHidden:true];
+//    [self.searchResultsTableView setHidden:true];
 }
 
 
@@ -113,7 +120,6 @@
     self.searchResultsTableView.delegate = self;
     self.searchResultsTableView.tableFooterView = [[UIView alloc] init];
     [self.window addSubview:self.searchResultsTableView];
-    
     
     [self updateTableView];
 }
