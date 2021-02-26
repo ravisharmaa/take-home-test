@@ -14,6 +14,8 @@
 
 - (void) configureWithWeather :(WeeklyWeather *)weather;
 
+@property (nonatomic) NSDictionary * imageMap;
+
 @end
 
 

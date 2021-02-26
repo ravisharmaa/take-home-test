@@ -12,6 +12,8 @@
 #import "CustomCollectionViewCell.h"
 #import "Constants.h"
 #import "WeeklyWeather.h"
+#import "SingleForecast.h"
+@import JGProgressHUD;
 
 @interface WeatherDetailViewController ()
 
@@ -35,9 +37,9 @@
 
 @property (nonatomic, strong) NSMutableArray<Section *> *sectionArray;
 
+@property SingleForecast *foreCast;
+
 @property NSMutableArray * weatherDataArray;
-
-
 
 @end
 
@@ -75,13 +77,20 @@
     
     self.weatherDataArray = [[NSMutableArray alloc] init];
     
-//    [manager getData:self.cityName needsHost:YES forURL:WEATHER_URL completion:^(NSDictionary * _Nonnull data, NSError * _Nonnull error) {
-//        if (error) {
-//            NSLog(@"%@", error);
-//        }
-//
-//        NSLog(@"%@", data);
-//    }];
+    JGProgressHUD *hud = [[JGProgressHUD alloc] init];
+    hud.textLabel.text = @"Loading...";
+    [hud showInView:self.view];
+    
+    
+    [manager getData:self.cityName needsHost:YES forURL:WEATHER_URL completion:^(NSDictionary * _Nonnull data, NSError * _Nonnull error) {
+        if (error) {
+            NSLog(@"%@", error);
+        }
+        
+        self.foreCast = [[SingleForecast alloc] initWithDict:data];
+        
+    }];
+    
     
     [manager getData:self.cityName needsHost:YES forURL:FORECAST_URL completion:^(NSDictionary * _Nonnull data, NSError * _Nonnull error) {
         if (error) {
@@ -94,11 +103,15 @@
         }
         
         __weak typeof(self) weakSelf = self;
+        
 
         dispatch_async(dispatch_get_main_queue(), ^{
             __strong typeof(self) strongSelf = weakSelf;
             [strongSelf configureDataSource];
-
+            
+            NSLog(@"%@", self.foreCast.weather);
+            
+            [hud dismiss];
         });
         
     }];
@@ -156,6 +169,7 @@
     
     section.orthogonalScrollingBehavior = UICollectionLayoutSectionOrthogonalScrollingBehaviorContinuous;
     
+    section.contentInsets = NSDirectionalEdgeInsetsMake(0, 20, 0, 0);
     
     UICollectionViewCompositionalLayout *layout = [[UICollectionViewCompositionalLayout alloc] initWithSection:section];
     
@@ -185,6 +199,8 @@
         
         WeeklyWeather *weather = self.weatherDataArray[indexPath.item];
         
+        NSLog(@"%@", [[@(weather.temp) stringValue] stringByAppendingString:@" C"]);
+        
         [cell configureWithWeather:weather];
         
         cell.layer.cornerRadius = 8;
@@ -209,6 +225,5 @@
     [_dataSource applySnapshot:snapshot animatingDifferences:YES];
     
 }
-
 
 @end

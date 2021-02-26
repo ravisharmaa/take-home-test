@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (AlertExtension)
 
-- (void) showAlertWith:(NSString *)title andMessage:     (NSString*)message;
+- (void) showAlertWith:(NSString *)title andMessage: (NSString*)message;
 
 @end
 

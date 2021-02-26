@@ -22,7 +22,7 @@
 
 - (instancetype)initWithDict:(NSDictionary *)dict {
     
-    double temp = [dict[@"main"][@"temp_max"]  integerValue];
+    int temp = [dict[@"main"][@"temp"]  integerValue] - 273.15;
     
     NSString *icon = dict[@"weather"][0][@"icon"];
     
