@@ -13,6 +13,7 @@
 #define APP_ID @"appid"
 #define API_KEY @"cd1eb04f6c3bdec3ac45dbf825541080"
 #define WEATHER_URL @"/data/2.5/weather"
+#define FORECAST_URL @"/data/2.5/forecast"
 #define QUERY_STRING_FOR_LOCATION @"q"
 #define MAGNIFYING_GLASS @"magnifyingglass"
 #define CITY_API @ "https://uxcam-api.herokuapp.com"

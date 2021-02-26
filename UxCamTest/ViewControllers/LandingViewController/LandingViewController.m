@@ -8,7 +8,6 @@
 #import "LandingViewController.h"
 #import "NetworkManager.h"
 #import "UIViewController+AlertExtension.h"
-#import "CJSONDeserializer.h"
 #import "TextFieldAndButtonView.h"
 #import "WeatherDetailViewController.h"
 
@@ -107,8 +106,8 @@
 
     NSLog(@"%@", self.searchView.searchTextField.text);
 //    if (self.searchView.searchTextField.text.length > 3) {
-//        WeatherDetailViewController *vc = [[WeatherDetailViewController alloc] initWithCityName:self.searchView.searchTextField.text];
-//        [self.navigationController pushViewController:vc animated:YES];
+        WeatherDetailViewController *vc = [[WeatherDetailViewController alloc] initWithCityName:self.searchView.searchTextField.text];
+        [self.navigationController pushViewController:vc animated:YES];
 //    }
 }
 
@@ -150,42 +149,42 @@
 
 #pragma mark - Search Bar Delegate Methods
 
-- (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    
-    NetworkManager *manager = [[NetworkManager alloc] init];
-    
-    if (searchBar.text.length > 3) {
-        
-        [self.activityIndicator startAnimating];
-        
-        if (searchBar.text.length > 3) {
-            
-            [self.activityIndicator startAnimating];
-            
-            __weak typeof(self) weakSelf = self;
-            
-            [manager getDataWith:searchBar.text completion:^(NSData * _Nonnull data, NSError * _Nonnull error) {
-                
-                __strong typeof(self) strongSelf = weakSelf;
-                
-                if (error != nil) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [strongSelf showAlertWith:@"Error" andMessage:error.localizedDescription];
-                    });
-                } else {
-                    NSError *theError = nil;
-                    id theObject = [[CJSONDeserializer deserializer] deserialize:data error:&theError];
-                    
-                    NSLog(@"%@", theObject);
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [strongSelf.activityIndicator stopAnimating];
-                    });
-                }
-            }];
-        }
-    }
-}
+//- (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+//    
+//    NetworkManager *manager = [[NetworkManager alloc] init];
+//    
+//    if (searchBar.text.length > 3) {
+//        
+//        [self.activityIndicator startAnimating];
+//        
+//        if (searchBar.text.length > 3) {
+//            
+//            [self.activityIndicator startAnimating];
+//            
+//            __weak typeof(self) weakSelf = self;
+//            
+//            [manager getDataWith:searchBar.text completion:^(NSData * _Nonnull data, NSError * _Nonnull error) {
+//                
+//                __strong typeof(self) strongSelf = weakSelf;
+//                
+//                if (error != nil) {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [strongSelf showAlertWith:@"Error" andMessage:error.localizedDescription];
+//                    });
+//                } else {
+//                    NSError *theError = nil;
+//                    //id theObject = [[CJSONDeserializer deserializer] deserialize:data error:&theError];
+//                    
+//                    NSLog(@"%@", theObject);
+//                    
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [strongSelf.activityIndicator stopAnimating];
+//                    });
+//                }
+//            }];
+//        }
+//    }
+//}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     

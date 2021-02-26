@@ -7,6 +7,7 @@
 
 #import "SceneDelegate.h"
 #import "LandingViewController.h"
+#import "WeatherDetailViewController.h"
 
 @interface SceneDelegate ()
 

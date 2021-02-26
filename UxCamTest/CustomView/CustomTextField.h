@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CustomTextField : UITextField<UITableViewDelegate, UITableViewDataSource>
-
+@property (nonatomic, strong) UITableView *searchResultsTableView;
 @end
 
 

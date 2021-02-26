@@ -16,11 +16,11 @@
 		D559FCC825E494E400047031 /* LandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D559FCC725E494E400047031 /* LandingViewController.m */; };
 		D57A6EE925E6A62D00C75E8F /* WeatherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A6EE825E6A62D00C75E8F /* WeatherDetailViewController.m */; };
 		D57A6EEE25E7AD1D00C75E8F /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A6EED25E7AD1D00C75E8F /* Country.m */; };
+		D582AC3125E8963D00FBFAEA /* WeeklyWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC3025E8963D00FBFAEA /* WeeklyWeather.m */; };
+		D582AC3625E8A9A300FBFAEA /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC3525E8A9A300FBFAEA /* Section.m */; };
+		D582AC3C25E8AA5200FBFAEA /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC3B25E8AA5200FBFAEA /* CustomCollectionViewCell.m */; };
 		D5AD2DAA25E4CFA600D7B7D0 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DA925E4CFA600D7B7D0 /* NetworkManager.m */; };
 		D5AD2DBC25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DBB25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m */; };
-		D5AD2DCA25E53D2800D7B7D0 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DC325E53D2800D7B7D0 /* NSDictionary_JSONExtensions.m */; };
-		D5AD2DCB25E53D2800D7B7D0 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DC825E53D2800D7B7D0 /* CJSONSerializer.m */; };
-		D5AD2DCC25E53D2800D7B7D0 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DC925E53D2800D7B7D0 /* CJSONDeserializer.m */; };
 		D5BEFB1C25E68D58001D9FF5 /* TextFieldAndButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BEFB1B25E68D58001D9FF5 /* TextFieldAndButtonView.m */; };
 /* End PBXBuildFile section */
 
@@ -42,18 +42,17 @@
 		D57A6EE825E6A62D00C75E8F /* WeatherDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailViewController.m; sourceTree = "<group>"; };
 		D57A6EEC25E7AD1D00C75E8F /* Country.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
 		D57A6EED25E7AD1D00C75E8F /* Country.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
+		D582AC2F25E8963D00FBFAEA /* WeeklyWeather.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeeklyWeather.h; sourceTree = "<group>"; };
+		D582AC3025E8963D00FBFAEA /* WeeklyWeather.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeeklyWeather.m; sourceTree = "<group>"; };
+		D582AC3425E8A9A300FBFAEA /* Section.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
+		D582AC3525E8A9A300FBFAEA /* Section.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
+		D582AC3A25E8AA5200FBFAEA /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
+		D582AC3B25E8AA5200FBFAEA /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
 		D5AD2DA825E4CFA600D7B7D0 /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		D5AD2DA925E4CFA600D7B7D0 /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		D5AD2DB725E4FB5200D7B7D0 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D5AD2DBA25E4FEE400D7B7D0 /* UIViewController+AlertExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AlertExtension.h"; sourceTree = "<group>"; };
 		D5AD2DBB25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AlertExtension.m"; sourceTree = "<group>"; };
-		D5AD2DC325E53D2800D7B7D0 /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
-		D5AD2DC425E53D2800D7B7D0 /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
-		D5AD2DC525E53D2800D7B7D0 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
-		D5AD2DC625E53D2800D7B7D0 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
-		D5AD2DC725E53D2800D7B7D0 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
-		D5AD2DC825E53D2800D7B7D0 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
-		D5AD2DC925E53D2800D7B7D0 /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
 		D5BEFB1A25E68D58001D9FF5 /* TextFieldAndButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldAndButtonView.h; sourceTree = "<group>"; };
 		D5BEFB1B25E68D58001D9FF5 /* TextFieldAndButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextFieldAndButtonView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +98,8 @@
 		D559FCA425E3EA2300047031 /* UxCamTest */ = {
 			isa = PBXGroup;
 			children = (
+				D582AC3925E8AA2C00FBFAEA /* CollectionViewCells */,
+				D582AC3325E8A99400FBFAEA /* Sections */,
 				D57A6EEB25E7ACFB00C75E8F /* Model */,
 				D54E507125E63A2000886CC2 /* CustomView */,
 				D5AD2DC125E53D0E00D7B7D0 /* Libraries */,
@@ -158,8 +159,28 @@
 			children = (
 				D57A6EEC25E7AD1D00C75E8F /* Country.h */,
 				D57A6EED25E7AD1D00C75E8F /* Country.m */,
+				D582AC2F25E8963D00FBFAEA /* WeeklyWeather.h */,
+				D582AC3025E8963D00FBFAEA /* WeeklyWeather.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D582AC3325E8A99400FBFAEA /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				D582AC3425E8A9A300FBFAEA /* Section.h */,
+				D582AC3525E8A9A300FBFAEA /* Section.m */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
+		D582AC3925E8AA2C00FBFAEA /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				D582AC3A25E8AA5200FBFAEA /* CustomCollectionViewCell.h */,
+				D582AC3B25E8AA5200FBFAEA /* CustomCollectionViewCell.m */,
+			);
+			path = CollectionViewCells;
 			sourceTree = "<group>";
 		};
 		D5AD2DA725E4CF8200D7B7D0 /* Manager */ = {
@@ -183,23 +204,8 @@
 		D5AD2DC125E53D0E00D7B7D0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				D5AD2DC225E53D1B00D7B7D0 /* TouchJSON */,
 			);
 			path = Libraries;
-			sourceTree = "<group>";
-		};
-		D5AD2DC225E53D1B00D7B7D0 /* TouchJSON */ = {
-			isa = PBXGroup;
-			children = (
-				D5AD2DC425E53D2800D7B7D0 /* CJSONDeserializer.h */,
-				D5AD2DC925E53D2800D7B7D0 /* CJSONDeserializer.m */,
-				D5AD2DC525E53D2800D7B7D0 /* CJSONSerializer.h */,
-				D5AD2DC825E53D2800D7B7D0 /* CJSONSerializer.m */,
-				D5AD2DC725E53D2800D7B7D0 /* JSONRepresentation.h */,
-				D5AD2DC625E53D2800D7B7D0 /* NSDictionary_JSONExtensions.h */,
-				D5AD2DC325E53D2800D7B7D0 /* NSDictionary_JSONExtensions.m */,
-			);
-			path = TouchJSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,17 +278,17 @@
 			files = (
 				D559FCA725E3EA2300047031 /* AppDelegate.m in Sources */,
 				D559FCB825E3EA2800047031 /* main.m in Sources */,
+				D582AC3125E8963D00FBFAEA /* WeeklyWeather.m in Sources */,
+				D582AC3C25E8AA5200FBFAEA /* CustomCollectionViewCell.m in Sources */,
 				D559FCC825E494E400047031 /* LandingViewController.m in Sources */,
 				D57A6EEE25E7AD1D00C75E8F /* Country.m in Sources */,
+				D582AC3625E8A9A300FBFAEA /* Section.m in Sources */,
 				D5BEFB1C25E68D58001D9FF5 /* TextFieldAndButtonView.m in Sources */,
-				D5AD2DCB25E53D2800D7B7D0 /* CJSONSerializer.m in Sources */,
 				D5AD2DAA25E4CFA600D7B7D0 /* NetworkManager.m in Sources */,
 				D57A6EE925E6A62D00C75E8F /* WeatherDetailViewController.m in Sources */,
 				D559FCAA25E3EA2300047031 /* SceneDelegate.m in Sources */,
-				D5AD2DCC25E53D2800D7B7D0 /* CJSONDeserializer.m in Sources */,
 				D5AD2DBC25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m in Sources */,
 				D54E507425E63A3B00886CC2 /* CustomTextField.m in Sources */,
-				D5AD2DCA25E53D2800D7B7D0 /* NSDictionary_JSONExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

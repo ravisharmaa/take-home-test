@@ -8,12 +8,12 @@
 #import "CustomTextField.h"
 #import "Constants.h"
 #import "Country.h"
+#import "NetworkManager.h"
 
 @interface CustomTextField()
 
-@property (nonatomic, strong) UITableView *searchResultsTableView;
-
 @property NSMutableArray *citiesArray;
+@property (nonatomic, strong) NetworkManager *manager;
 
 @end
 
@@ -35,6 +35,7 @@
         imageView.image = systemImage;
         [self setLeftView:imageView];
         [self setLeftViewMode:UITextFieldViewModeAlways];
+        self.manager = [[NetworkManager alloc] init];
     }
     return self;
 }
@@ -46,38 +47,45 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self buildSearchTableView];
 }
 
 - (void) willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     
     [self addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
-    [self addTarget:self action:@selector(textFieldDidBeingEditing) forControlEvents:UIControlEventEditingDidBegin];
+    [self addTarget:self action:@selector(textFieldDidBeginEditing) forControlEvents:UIControlEventEditingDidBegin];
     [self addTarget:self action:@selector(textFieldEndEditing) forControlEvents:UIControlEventEditingDidEnd];
     [self addTarget:self action:@selector(textFieldEndEditingOnExit) forControlEvents:UIControlEventEditingDidEndOnExit];
     
 }
 
 - (void) textFieldDidChange {
-    [self getCountriesData];
-    [self updateTableView];
-    [self.searchResultsTableView setHidden:false];
     
+    if (![self.text isEqualToString:@"" ]){
+        [self.citiesArray removeAllObjects];
+        [self getCountriesData];
+        [self updateTableView];
+    } else {
+        [self.citiesArray removeAllObjects];
+    }
 }
 
-- (void) textFieldDidBeingEditing {
-    
+- (void) textFieldDidBeginEditing {
+    if (self.citiesArray.count > 0) {
+        [self.citiesArray removeAllObjects];
+    }
+    [self buildSearchTableView];
 }
 
 - (void) textFieldEndEditing {
     [self.searchResultsTableView setHidden:true];
+    //[self.citiesArray removeAllObjects];
+    [self.searchResultsTableView reloadData];
 }
 
 - (void) textFieldEndEditingOnExit {
     [self.searchResultsTableView setHidden:true];
 }
-
 
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
@@ -103,7 +111,9 @@
     self.searchResultsTableView = [[UITableView alloc] init];
     self.searchResultsTableView.dataSource = self;
     self.searchResultsTableView.delegate = self;
+    self.searchResultsTableView.tableFooterView = [[UIView alloc] init];
     [self.window addSubview:self.searchResultsTableView];
+    
     
     [self updateTableView];
 }
@@ -140,9 +150,9 @@
             
             NSLog(@"%lu", self.citiesArray.count);
             
-           // dispatch_async(dispatch_get_main_queue(), ^{
-                //[self.searchResultsTableView reloadData];
-            //});
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.searchResultsTableView reloadData];
+            });
             
         }] resume];
     }
@@ -153,7 +163,7 @@
     
     CGFloat tableHeight;
     
-    tableHeight = self.searchResultsTableView.contentSize.height;
+    tableHeight = self.searchResultsTableView.contentSize.height + 45;
     
     if (tableHeight < self.searchResultsTableView.contentSize.height) {
         tableHeight -= 10;
@@ -183,7 +193,7 @@
         [self.superview bringSubviewToFront:self];
     }
     
-    //[self.searchResultsTableView reloadData];
+    [self.searchResultsTableView reloadData];
     
 }
 
