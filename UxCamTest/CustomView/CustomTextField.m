@@ -14,6 +14,7 @@
 
 @property NSMutableArray *citiesArray;
 @property (nonatomic, strong) NetworkManager *manager;
+@property NSMutableArray *filteredArray;
 
 @end
 
@@ -35,14 +36,16 @@
         imageView.image = systemImage;
         [self setLeftView:imageView];
         [self setLeftViewMode:UITextFieldViewModeAlways];
-        self.manager = [[NetworkManager alloc] init];
+        [self getCountriesData];
+        [self filterWith:self.text];
+        [self.searchResultsTableView setHidden:YES];
     }
     return self;
 }
 
 - (void) willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-   // [self.searchResultsTableView removeFromSuperview];
+    [self.searchResultsTableView removeFromSuperview];
 }
 
 - (void)layoutSubviews {
@@ -61,37 +64,47 @@
 
 - (void) textFieldDidChange {
     
-//    double delayInSeconds = 0.5;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        if (![self.text isEqualToString:@"" ]){
-//            [self.citiesArray removeAllObjects];
-//            [self.searchResultsTableView reloadData];
-//            [self getCountriesData];
-//            [self updateTableView];
-//        } else {
-//            [self.citiesArray removeAllObjects];
-//        }
-//    });
+    if (![self.text isEqualToString:@"" ]){
+        [self.filteredArray removeAllObjects];
+        [self filterWith:self.text];
+        [self updateTableView];
+        [self.searchResultsTableView setHidden:NO];
+    } else {
+        [self.searchResultsTableView setHidden:YES];
+    }
+}
 
+- (void) filterWith: (NSString *) text {
+    self.filteredArray = [[NSMutableArray alloc] init];
     
+    for (Country *item in self.citiesArray) {
+        if ([item.name.lowercaseString containsString:text.lowercaseString]) {
+            [self.filteredArray addObject:item];
+        } else {
+            //[self.filteredArray removeAllObjects];
+        }
+    }
 }
 
 - (void) textFieldDidBeginEditing {
-//    if (self.citiesArray.count > 0) {
-//        [self.citiesArray removeAllObjects];
-//    }
-//    [self buildSearchTableView];
+    
+    if (self.text.length > 3) {
+        [self buildSearchTableView];
+    } else {
+        [self.searchResultsTableView setHidden:YES];
+    }
 }
 
 - (void) textFieldEndEditing {
-//    [self.searchResultsTableView setHidden:true];
-//    //[self.citiesArray removeAllObjects];
-//    [self.searchResultsTableView reloadData];
+    [self.searchResultsTableView setHidden:true];
+    [self.filteredArray removeAllObjects];
+    [self.searchResultsTableView reloadData];
 }
 
 - (void) textFieldEndEditingOnExit {
-//    [self.searchResultsTableView setHidden:true];
+    [self.searchResultsTableView setHidden:true];
+    [self.filteredArray removeAllObjects];
+    [self.searchResultsTableView reloadData];
 }
 
 
@@ -125,15 +138,11 @@
 }
 
 - (void) getCountriesData {
-    if (self.text.length > 0) {
-        
-        _citiesArray = [[NSMutableArray alloc] init];
-        
-        NSURLComponents *components = [[NSURLComponents alloc] initWithString:@"https://uxcam-api.herokuapp.com"];
-        
-        NSURLQueryItem *item = [[NSURLQueryItem alloc] initWithName:@"city" value:self.text];
-        
-        components.queryItems = @[item];
+    
+    _citiesArray = [[NSMutableArray alloc] init];
+    
+    if (HAS_INTERNET) {
+        NSURLComponents *components = [[NSURLComponents alloc] initWithString:CITY_API];
         
         [[NSURLSession.sharedSession dataTaskWithURL:components.URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
@@ -146,19 +155,23 @@
                 return;
             }
             
-            NSArray *fetchedData = jsonData[@"data"];
-            
-            for (NSDictionary *dic in fetchedData) {
-                Country *country = [[Country alloc] initWithDictionary:dic];
-                NSLog(@"%@", country.name);
-                [self.citiesArray addObject:country];
+            if (jsonData != nil) {
+                NSArray *fetchedData = jsonData[@"data"];
+                
+                for (NSDictionary *dic in fetchedData) {
+                    Country *country = [[Country alloc] initWithDictionary:dic];
+                    NSLog(@"%@", country.name);
+                    [self.citiesArray addObject:country];
+                }
+                
+                NSLog(@"%lu", self.citiesArray.count);
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.searchResultsTableView reloadData];
+                });
             }
             
-            NSLog(@"%lu", self.citiesArray.count);
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.searchResultsTableView reloadData];
-            });
+           
             
         }] resume];
     }
@@ -169,11 +182,11 @@
     
     CGFloat tableHeight;
     
-    tableHeight = self.searchResultsTableView.contentSize.height + 45;
+    tableHeight = self.searchResultsTableView.contentSize.height ;
     
-    if (tableHeight < self.searchResultsTableView.contentSize.height) {
-        tableHeight -= 10;
-    }
+//    if (tableHeight < self.searchResultsTableView.contentSize.height) {
+//        tableHeight -= 10;
+//    }
     
     CGRect tableFrame;
     
@@ -183,7 +196,7 @@
     
     tableFrame.origin.x += 2;
     
-    tableFrame.origin.y =+ self.frame.size.height + 80;
+    tableFrame.origin.y =+ self.frame.size.height + 70;
     
     [UIView animateWithDuration:0.2 animations:^{
         self.searchResultsTableView.frame = tableFrame;
@@ -193,7 +206,7 @@
     [self.searchResultsTableView setSeparatorInset:UIEdgeInsetsZero];
     self.searchResultsTableView.layer.cornerRadius = 10;
     self.searchResultsTableView.separatorColor = UIColor.lightGrayColor;
-    self.searchResultsTableView.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:0.5];
+    self.searchResultsTableView.backgroundColor = UIColor.clearColor;
     
     if (self.isFirstResponder) {
         [self.superview bringSubviewToFront:self];
@@ -205,20 +218,41 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    Country *country = self.citiesArray[indexPath.row];
-    cell.textLabel.text = country.name;
+    
+    cell.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:0.8];
+    
+    if (self.filteredArray.count == 0) {
+        Country *country = self.citiesArray[indexPath.row];
+        cell.textLabel.text = country.name;
+    } else {
+        Country *country = self.filteredArray[indexPath.row];
+        cell.textLabel.text = country.name;
+    }
     return  cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  self.citiesArray.count;
+    if (self.filteredArray.count == 0) {
+        return self.citiesArray.count;
+    } else {
+        return self.filteredArray.count;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Country *country = self.citiesArray[indexPath.row];
-    self.text = country.name;
-    [self.searchResultsTableView setHidden:YES];
-    [self endEditing:YES];
+    if (self.filteredArray.count == 0) {
+        Country *country = self.citiesArray[indexPath.row];
+        self.text = country.name;
+        [self.searchResultsTableView setHidden:YES];
+        [self endEditing:YES];
+    } else {
+        Country *country = self.filteredArray[indexPath.row];
+        self.text = country.name;
+        [self.searchResultsTableView setHidden:YES];
+        [self endEditing:YES];
+    }
+    
+    
 }
 
 

@@ -13,11 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSURLComponents *urlComponents;
 
-
 -(void) getData: (NSString *) cityName needsHost: (BOOL)host forURL: (NSString *) url completion:(void(^)(NSDictionary* data, NSError *error)) completion;
 
--(void) getDataWith: (NSString *) name completion: (void(^) (NSData * data, NSError *error)) completion;
-
+- (void) getImageData: (NSString *)url completion:(void(^)(NSData* data, NSError *error)) completion;
 
 @end
 

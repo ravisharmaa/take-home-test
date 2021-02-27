@@ -16,30 +16,47 @@
 		D559FCC825E494E400047031 /* LandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D559FCC725E494E400047031 /* LandingViewController.m */; };
 		D57A6EE925E6A62D00C75E8F /* WeatherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A6EE825E6A62D00C75E8F /* WeatherDetailViewController.m */; };
 		D57A6EEE25E7AD1D00C75E8F /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A6EED25E7AD1D00C75E8F /* Country.m */; };
+		D57D05AF25E9FA6400945108 /* JGProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57D05AC25E9FA5500945108 /* JGProgressHUD.framework */; };
+		D57D05B025E9FA6400945108 /* JGProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D57D05AC25E9FA5500945108 /* JGProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D582AC3125E8963D00FBFAEA /* WeeklyWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC3025E8963D00FBFAEA /* WeeklyWeather.m */; };
 		D582AC3625E8A9A300FBFAEA /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC3525E8A9A300FBFAEA /* Section.m */; };
 		D582AC3C25E8AA5200FBFAEA /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC3B25E8AA5200FBFAEA /* CustomCollectionViewCell.m */; };
-		D582AC7025E90ADB00FBFAEA /* JGProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D582AC6B25E90ACE00FBFAEA /* JGProgressHUD.framework */; };
-		D582AC7125E90ADB00FBFAEA /* JGProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D582AC6B25E90ACE00FBFAEA /* JGProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D582AC7625E9111600FBFAEA /* SingleForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC7525E9111600FBFAEA /* SingleForecast.m */; };
 		D582AC7A25E91BD800FBFAEA /* CompositionalLayoutsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC7925E91BD800FBFAEA /* CompositionalLayoutsHelper.m */; };
 		D582AC7D25E9339D00FBFAEA /* ImageMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC7C25E9339D00FBFAEA /* ImageMapper.m */; };
+		D582AC8125E967A900FBFAEA /* DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC8025E967A900FBFAEA /* DateFormatter.m */; };
+		D582AC8525E96CA300FBFAEA /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = D582AC8425E96CA300FBFAEA /* Readme.md */; };
+		D582AC9525E9D9A200FBFAEA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC9325E9D9A200FBFAEA /* Reachability.m */; };
 		D5AD2DAA25E4CFA600D7B7D0 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DA925E4CFA600D7B7D0 /* NetworkManager.m */; };
 		D5AD2DBC25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DBB25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m */; };
 		D5BEFB1C25E68D58001D9FF5 /* TextFieldAndButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BEFB1B25E68D58001D9FF5 /* TextFieldAndButtonView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D582AC6A25E90ACE00FBFAEA /* PBXContainerItemProxy */ = {
+		D57D05A025E9FA4D00945108 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D582AC6525E90ACE00FBFAEA /* JGProgressHUD.xcodeproj */;
+			containerPortal = D57D059B25E9FA4D00945108 /* JGProgressHUD.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6BF7DC5A1AEFCFD9000A0AE0;
 			remoteInfo = "JGProgressHUD-iOS";
 		};
-		D582AC6C25E90ACE00FBFAEA /* PBXContainerItemProxy */ = {
+		D57D05A225E9FA4D00945108 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D582AC6525E90ACE00FBFAEA /* JGProgressHUD.xcodeproj */;
+			containerPortal = D57D059B25E9FA4D00945108 /* JGProgressHUD.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6BABF9A31F7A6133005E783F;
+			remoteInfo = "JGProgressHUD-tvOS";
+		};
+		D57D05AB25E9FA5500945108 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6BF7DC5A1AEFCFD9000A0AE0;
+			remoteInfo = "JGProgressHUD-iOS";
+		};
+		D57D05AD25E9FA5500945108 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6BABF9A31F7A6133005E783F;
 			remoteInfo = "JGProgressHUD-tvOS";
@@ -53,7 +70,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D582AC7125E90ADB00FBFAEA /* JGProgressHUD.framework in Embed Frameworks */,
+				D57D05B025E9FA6400945108 /* JGProgressHUD.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,19 +95,25 @@
 		D57A6EE825E6A62D00C75E8F /* WeatherDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailViewController.m; sourceTree = "<group>"; };
 		D57A6EEC25E7AD1D00C75E8F /* Country.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
 		D57A6EED25E7AD1D00C75E8F /* Country.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
+		D57D059B25E9FA4D00945108 /* JGProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JGProgressHUD.xcodeproj; path = "../../Downloads/JGProgressHUD-master/JGProgressHUD.xcodeproj"; sourceTree = "<group>"; };
+		D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JGProgressHUD.xcodeproj; path = "../../Downloads/JGProgressHUD-master/JGProgressHUD.xcodeproj"; sourceTree = "<group>"; };
 		D582AC2F25E8963D00FBFAEA /* WeeklyWeather.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeeklyWeather.h; sourceTree = "<group>"; };
 		D582AC3025E8963D00FBFAEA /* WeeklyWeather.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeeklyWeather.m; sourceTree = "<group>"; };
 		D582AC3425E8A9A300FBFAEA /* Section.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
 		D582AC3525E8A9A300FBFAEA /* Section.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
 		D582AC3A25E8AA5200FBFAEA /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		D582AC3B25E8AA5200FBFAEA /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
-		D582AC6525E90ACE00FBFAEA /* JGProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JGProgressHUD.xcodeproj; path = "../../../../Desktop/JGProgressHUD-master/JGProgressHUD.xcodeproj"; sourceTree = "<group>"; };
 		D582AC7425E9111600FBFAEA /* SingleForecast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleForecast.h; sourceTree = "<group>"; };
 		D582AC7525E9111600FBFAEA /* SingleForecast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleForecast.m; sourceTree = "<group>"; };
 		D582AC7825E91BD800FBFAEA /* CompositionalLayoutsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompositionalLayoutsHelper.h; sourceTree = "<group>"; };
 		D582AC7925E91BD800FBFAEA /* CompositionalLayoutsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompositionalLayoutsHelper.m; sourceTree = "<group>"; };
 		D582AC7B25E9339D00FBFAEA /* ImageMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageMapper.h; sourceTree = "<group>"; };
 		D582AC7C25E9339D00FBFAEA /* ImageMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageMapper.m; sourceTree = "<group>"; };
+		D582AC7F25E967A900FBFAEA /* DateFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateFormatter.h; sourceTree = "<group>"; };
+		D582AC8025E967A900FBFAEA /* DateFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateFormatter.m; sourceTree = "<group>"; };
+		D582AC8425E96CA300FBFAEA /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		D582AC9325E9D9A200FBFAEA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D582AC9425E9D9A200FBFAEA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		D5AD2DA825E4CFA600D7B7D0 /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		D5AD2DA925E4CFA600D7B7D0 /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		D5AD2DB725E4FB5200D7B7D0 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -105,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D582AC7025E90ADB00FBFAEA /* JGProgressHUD.framework in Frameworks */,
+				D57D05AF25E9FA6400945108 /* JGProgressHUD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +149,8 @@
 		D559FC9925E3EA2200047031 = {
 			isa = PBXGroup;
 			children = (
+				D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */,
+				D582AC8425E96CA300FBFAEA /* Readme.md */,
 				D559FCA425E3EA2300047031 /* UxCamTest */,
 				D559FCA325E3EA2300047031 /* Products */,
 				D582AC4E25E90A2D00FBFAEA /* Frameworks */,
@@ -213,6 +238,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D57D059C25E9FA4D00945108 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D57D05A125E9FA4D00945108 /* JGProgressHUD.framework */,
+				D57D05A325E9FA4D00945108 /* JGProgressHUD.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D57D05A725E9FA5500945108 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D57D05AC25E9FA5500945108 /* JGProgressHUD.framework */,
+				D57D05AE25E9FA5500945108 /* JGProgressHUD.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D582AC3325E8A99400FBFAEA /* Sections */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +277,7 @@
 		D582AC4E25E90A2D00FBFAEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D57D059B25E9FA4D00945108 /* JGProgressHUD.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -241,18 +285,9 @@
 		D582AC5225E90A4000FBFAEA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				D582AC6525E90ACE00FBFAEA /* JGProgressHUD.xcodeproj */,
+				D582AC9225E9D95B00FBFAEA /* Rechability */,
 			);
 			path = Libraries;
-			sourceTree = "<group>";
-		};
-		D582AC6625E90ACE00FBFAEA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D582AC6B25E90ACE00FBFAEA /* JGProgressHUD.framework */,
-				D582AC6D25E90ACE00FBFAEA /* JGProgressHUD.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D582AC7725E91BB900FBFAEA /* Helpers */ = {
@@ -262,8 +297,19 @@
 				D582AC7925E91BD800FBFAEA /* CompositionalLayoutsHelper.m */,
 				D582AC7B25E9339D00FBFAEA /* ImageMapper.h */,
 				D582AC7C25E9339D00FBFAEA /* ImageMapper.m */,
+				D582AC7F25E967A900FBFAEA /* DateFormatter.h */,
+				D582AC8025E967A900FBFAEA /* DateFormatter.m */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D582AC9225E9D95B00FBFAEA /* Rechability */ = {
+			isa = PBXGroup;
+			children = (
+				D582AC9425E9D9A200FBFAEA /* Reachability.h */,
+				D582AC9325E9D9A200FBFAEA /* Reachability.m */,
+			);
+			path = Rechability;
 			sourceTree = "<group>";
 		};
 		D5AD2DA725E4CF8200D7B7D0 /* Manager */ = {
@@ -331,8 +377,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = D582AC6625E90ACE00FBFAEA /* Products */;
-					ProjectRef = D582AC6525E90ACE00FBFAEA /* JGProgressHUD.xcodeproj */;
+					ProductGroup = D57D05A725E9FA5500945108 /* Products */;
+					ProjectRef = D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */;
+				},
+				{
+					ProductGroup = D57D059C25E9FA4D00945108 /* Products */;
+					ProjectRef = D57D059B25E9FA4D00945108 /* JGProgressHUD.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -343,18 +393,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		D582AC6B25E90ACE00FBFAEA /* JGProgressHUD.framework */ = {
+		D57D05A125E9FA4D00945108 /* JGProgressHUD.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = JGProgressHUD.framework;
-			remoteRef = D582AC6A25E90ACE00FBFAEA /* PBXContainerItemProxy */;
+			remoteRef = D57D05A025E9FA4D00945108 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D582AC6D25E90ACE00FBFAEA /* JGProgressHUD.framework */ = {
+		D57D05A325E9FA4D00945108 /* JGProgressHUD.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = JGProgressHUD.framework;
-			remoteRef = D582AC6C25E90ACE00FBFAEA /* PBXContainerItemProxy */;
+			remoteRef = D57D05A225E9FA4D00945108 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D57D05AC25E9FA5500945108 /* JGProgressHUD.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JGProgressHUD.framework;
+			remoteRef = D57D05AB25E9FA5500945108 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D57D05AE25E9FA5500945108 /* JGProgressHUD.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JGProgressHUD.framework;
+			remoteRef = D57D05AD25E9FA5500945108 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -366,6 +430,7 @@
 			files = (
 				D559FCB525E3EA2800047031 /* LaunchScreen.storyboard in Resources */,
 				D559FCB225E3EA2800047031 /* Assets.xcassets in Resources */,
+				D582AC8525E96CA300FBFAEA /* Readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +449,7 @@
 				D559FCC825E494E400047031 /* LandingViewController.m in Sources */,
 				D57A6EEE25E7AD1D00C75E8F /* Country.m in Sources */,
 				D582AC3625E8A9A300FBFAEA /* Section.m in Sources */,
+				D582AC8125E967A900FBFAEA /* DateFormatter.m in Sources */,
 				D5BEFB1C25E68D58001D9FF5 /* TextFieldAndButtonView.m in Sources */,
 				D582AC7625E9111600FBFAEA /* SingleForecast.m in Sources */,
 				D5AD2DAA25E4CFA600D7B7D0 /* NetworkManager.m in Sources */,
@@ -391,6 +457,7 @@
 				D582AC7A25E91BD800FBFAEA /* CompositionalLayoutsHelper.m in Sources */,
 				D559FCAA25E3EA2300047031 /* SceneDelegate.m in Sources */,
 				D5AD2DBC25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m in Sources */,
+				D582AC9525E9D9A200FBFAEA /* Reachability.m in Sources */,
 				D54E507425E63A3B00886CC2 /* CustomTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

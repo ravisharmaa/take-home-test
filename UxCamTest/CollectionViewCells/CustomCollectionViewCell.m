@@ -6,36 +6,12 @@
 //
 
 #import "CustomCollectionViewCell.h"
+#import "ImageMapper.h"
+#import "DateFormatter.h"
+
+#pragma mark - CollectionViewCell and its properties
 
 @implementation CustomCollectionViewCell
-
-- (NSDictionary *)imageMap {
-    static NSDictionary *_imageMap = nil;
-    if (! _imageMap) {
-        _imageMap = @{
-            @"01d" : @"weather-clear",
-            @"02d" : @"weather-few",
-            @"03d" : @"weather-few",
-            @"04d" : @"weather-broken",
-            @"09d" : @"weather-shower",
-            @"10d" : @"weather-rain",
-            @"11d" : @"weather-tstorm",
-            @"13d" : @"weather-snow",
-            @"50d" : @"weather-mist",
-            @"01n" : @"weather-moon",
-            @"02n" : @"weather-few-night",
-            @"03n" : @"weather-few-night",
-            @"04n" : @"weather-broken",
-            @"09n" : @"weather-shower",
-            @"10n" : @"weather-rain-night",
-            @"11n" : @"weather-tstorm",
-            @"13n" : @"weather-snow",
-            @"50n" : @"weather-mist",
-        };
-    }
-    return _imageMap;
-}
-
 
 -(instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -45,6 +21,7 @@
     return self;
 }
 
+// preparigng views
 
 - (void) configureViews {
     self.weatherImage = [[UIImageView alloc] init];
@@ -86,17 +63,10 @@
 }
 
 - (void) configureWithWeather:(WeeklyWeather *)weather {
-    self.weatherImage.image = [UIImage imageNamed:self.imageMap[weather.icon]];
+    self.weatherImage.image = [UIImage imageNamed: [ImageMapper getImageOfName:weather.icon]];
     self.weatherImage.contentMode = UIViewContentModeScaleAspectFill;
     self.dateLabel.text = [@(weather.temp).stringValue stringByAppendingString:@"°"];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-     NSDate *date = [dateFormatter dateFromString:weather.time];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
-    NSInteger hour = [components hour];
-    self.timeLabel.text = [@(hour).stringValue stringByAppendingString:@":00"];
+    self.timeLabel.text = [DateFormatter getHourFromString:weather.time];
 }
 
 @end

@@ -7,6 +7,7 @@
 
 #ifndef Constants_h
 #define Constants_h
+#import "Reachability.h"
 
 #define SCHEME @"https"
 #define BASE_URL @"api.openweathermap.org"
@@ -16,6 +17,8 @@
 #define FORECAST_URL @"/data/2.5/forecast"
 #define QUERY_STRING_FOR_LOCATION @"q"
 #define MAGNIFYING_GLASS @"magnifyingglass"
-#define CITY_API @ "https://uxcam-api.herokuapp.com"
+#define CITY_API @"https://uxcam-api.herokuapp.com"
+#define DATE_FORMAT @"yyyy-MM-dd HH:mm:ss"
+#define HAS_INTERNET [[Reachability reachabilityForInternetConnection] isReachable]
 
 #endif /* Constants_h */

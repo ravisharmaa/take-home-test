@@ -15,10 +15,13 @@
 #import "SingleForecast.h"
 #import "CompositionalLayoutsHelper.h"
 #import "UIViewController+AlertExtension.h"
+#import "ImageMapper.h"
 
 @import JGProgressHUD;
 
 @interface WeatherDetailViewController ()
+
+#pragma mark - Properties
 
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 
@@ -53,6 +56,8 @@
 
 @implementation WeatherDetailViewController
 
+#pragma mark - Init with a city name so that the weather gets populated on every load. For this app, I have chose the weather to load from Paris.
+
 - (id)initWithCityName:(NSString *)cityName {
     if (self = [super init]) {
         _cityName = cityName;
@@ -72,6 +77,8 @@
     
     [self configureViews];
     
+    _manager = [[NetworkManager alloc] init];
+    
     [self getData];
     
     [self configureLabels];
@@ -79,12 +86,7 @@
     [self.searchView.goButton addTarget:self action:@selector(handleTap) forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void) handleTap {
-    if (self.searchView.searchTextField.text.length > 3) {
-        self.cityName = self.searchView.searchTextField.text;
-        [self getData];
-    }
-}
+#pragma mark - Views Initialization and Layout.
 
 - (void) configureLabels {
     
@@ -103,8 +105,8 @@
     self.iconImageView = [[UIImageView alloc] initWithImage:image];
     self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.iconImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.iconImageView.heightAnchor constraintEqualToConstant:40].active = YES;
-    [self.iconImageView.widthAnchor constraintEqualToConstant:40].active = YES;
+    [self.iconImageView.heightAnchor constraintEqualToConstant:30].active = YES;
+    [self.iconImageView.widthAnchor constraintEqualToConstant:30].active = YES;
     
     UIImage *highImage = [[UIImage systemImageNamed:@"arrow.up"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.highImageView = [[UIImageView alloc] initWithImage:highImage];
@@ -143,17 +145,20 @@
     
     UIStackView *feelsLikeAndWeatherStack = [[UIStackView alloc] initWithArrangedSubviews:@[self.iconImageView, self.feelsLikeLabel, dummyView]];
     feelsLikeAndWeatherStack.axis = UILayoutConstraintAxisHorizontal;
+    feelsLikeAndWeatherStack.spacing = 5;
+    feelsLikeAndWeatherStack.alignment = UIStackViewAlignmentBottom;
     
-    UIStackView *highLowStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.highImageView, self.highLabel, self.lowImageView, self.lowLabel, dummyView]];
+    UIStackView *highLowStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.highImageView,self.highLabel,dummyView ,self.lowImageView, self.lowLabel, dummyView]];
     highLowStackView.axis = UILayoutConstraintAxisHorizontal;
     
-    UIStackView *feelsLikeAndHighLowStack = [[UIStackView alloc] initWithArrangedSubviews:@[feelsLikeAndWeatherStack, highLowStackView]];
+    UIStackView *feelsLikeAndHighLowStack = [[UIStackView alloc] initWithArrangedSubviews:@[feelsLikeAndWeatherStack, dummyView,highLowStackView]];
     feelsLikeAndHighLowStack.axis = UILayoutConstraintAxisVertical;
     
-    UIStackView *overAllStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.cityLabel, feelsLikeAndHighLowStack, self.tempratureLabel]];
+    UIStackView *overAllStackView = [[UIStackView alloc] initWithArrangedSubviews:@[self.cityLabel, feelsLikeAndHighLowStack,  self.tempratureLabel]];
     overAllStackView.axis = UILayoutConstraintAxisVertical;
     overAllStackView.alignment = UIStackViewAlignmentLeading;
     overAllStackView.distribution = UIStackViewDistributionFillProportionally;
+    
     
     [self.view addSubview:overAllStackView];
     
@@ -167,66 +172,80 @@
     
 }
 
+// set the status bar color to light.
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
-}
+#pragma mark - Gets the data from webservice.
 
 - (void) getData {
-    
-    NetworkManager *manager = [[NetworkManager alloc] init];
-    
+        
     self.weatherDataArray = [[NSMutableArray alloc] init];
     
     JGProgressHUD *hud = [[JGProgressHUD alloc] init];
-    hud.textLabel.text = @"Loading...";
-    [hud showInView:self.view];
+   
     
+    // sending network request...
     
-    [manager getData:self.cityName needsHost:YES forURL:WEATHER_URL completion:^(NSDictionary * _Nonnull data, NSError * _Nonnull error) {
-        if (error) {
-            NSLog(@"%@", error);
-        }
+    if (HAS_INTERNET) {
+        hud.textLabel.text = @"Loading...";
+        [hud showInView:self.view];
         
-        if ([data[@"message"] isEqualToString:@"city not found"]) {
+        [_manager getData:self.cityName needsHost:YES forURL:WEATHER_URL completion:^(NSDictionary * _Nullable data, NSError * _Nonnull error) {
+            if (error) {
+                NSLog(@"%@", error);
+            }
+            
+            __weak typeof(self) weakSelf = self;
+            
+            if ([data[@"message"] isEqualToString:@"city not found"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    __strong typeof(self) strongSelf = weakSelf;
+                    [strongSelf showAlertWith:@"Error" andMessage:@"City Not Found"];
+                    [hud dismiss];
+                });
+               
+            }
+            
+            self.foreCast = [[SingleForecast alloc] initWithDict:data];
+            
+        }];
+        
+        // sending a network request to fetch weekly weather...
+        
+        [_manager getData:self.cityName needsHost:YES forURL:FORECAST_URL completion:^(NSDictionary * _Nullable data, NSError * _Nonnull error) {
+            if (error) {
+                NSLog(@"%@", error);
+            }
+            
+            for (NSDictionary *dict in data[@"list"]) {
+                WeeklyWeather *weather = [[WeeklyWeather alloc] initWithDict:dict];
+                [self.weatherDataArray addObject:weather];
+            }
+            
+            __weak typeof(self) weakSelf = self;
+            
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self showAlertWith:@"Error" andMessage:@"City Not Found"];
+                __strong typeof(self) strongSelf = weakSelf;
+                [strongSelf configureDataSource];
+                [strongSelf updateLabelsWith:self.foreCast];
                 [hud dismiss];
+                
             });
-           
-        }
-        
-        self.foreCast = [[SingleForecast alloc] initWithDict:data];
-        
-    }];
+            
+        }];
+    } else {
+        hud.textLabel.text = @"No Connection !";
+        [hud showInView:self.view];
+        [hud dismissAfterDelay:1.0];
+    }
     
-    
-    [manager getData:self.cityName needsHost:YES forURL:FORECAST_URL completion:^(NSDictionary * _Nonnull data, NSError * _Nonnull error) {
-        if (error) {
-            NSLog(@"%@", error);
-        }
-        
-        for (NSDictionary *dict in data[@"list"]) {
-            WeeklyWeather *weather = [[WeeklyWeather alloc] initWithDict:dict];
-            [self.weatherDataArray addObject:weather];
-        }
-        
-        __weak typeof(self) weakSelf = self;
-        
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            __strong typeof(self) strongSelf = weakSelf;
-            [strongSelf configureDataSource];
-            [strongSelf updateLabelsWith:self.foreCast];
-            [hud dismiss];
-        });
-        
-    }];
 }
+
+// prepare background view and its layout.
 
 - (void) configureBackgroundview {
     
@@ -262,6 +281,7 @@
     
 }
 
+// prepare views
 - (void) configureViews {
     
     self.weeklyForecastView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[CompositionalLayoutsHelper weatherDetailLayout]];
@@ -270,7 +290,7 @@
     
     [self.view addSubview:_weeklyForecastView];
     
-    self.weeklyForecastView.backgroundColor = [UIColor.systemGrayColor  colorWithAlphaComponent:0.2];
+    self.weeklyForecastView.backgroundColor = [UIColor.blackColor  colorWithAlphaComponent:0.4];
     
     self.weeklyForecastView.layer.cornerRadius = 8;
     
@@ -284,6 +304,7 @@
     
 }
 
+// prepare datasource for collection view
 - (void) configureDataSource {
     
     self.dataSource = [[UICollectionViewDiffableDataSource alloc] initWithCollectionView:_weeklyForecastView cellProvider:^UICollectionViewCell * _Nullable(UICollectionView * collectionView, NSIndexPath * indexPath, id identifier) {
@@ -315,12 +336,24 @@
     
 }
 
--(void) updateLabelsWith :(SingleForecast *)foreCast {
+// update labels from response
+-(void) updateLabelsWith :(SingleForecast *)forecast {
     self.cityLabel.text = self.cityName;
-    self.highLabel.text = [@(foreCast.maximumTemp).stringValue stringByAppendingString:@"°"];
-    self.lowLabel.text = [@(foreCast.minimumTemp).stringValue stringByAppendingString:@"°"];
-    self.tempratureLabel.text = [@(foreCast.currentTemp).stringValue stringByAppendingString:@"°"];
-    self.feelsLikeLabel.text = foreCast.weather;
+    self.highLabel.text = [@(forecast.maximumTemp).stringValue stringByAppendingString:@"°"];
+    self.lowLabel.text = [@(forecast.minimumTemp).stringValue stringByAppendingString:@"°"];
+    self.tempratureLabel.text = [@(forecast.currentTemp).stringValue stringByAppendingString:@"°"];
+    self.feelsLikeLabel.text = forecast.weather;
     self.searchView.searchTextField.text = self.cityName;
+    self.iconImageView.image = [UIImage imageNamed:[ImageMapper getImageOfName:forecast.weatherIcon]];
 }
+
+// handle the tap of button
+-(void) handleTap {
+    [self.searchView.searchTextField.searchResultsTableView setHidden:YES];
+    if (self.searchView.searchTextField.text.length > 3) {
+        self.cityName = self.searchView.searchTextField.text;
+        [self getData];
+    }
+}
+
 @end

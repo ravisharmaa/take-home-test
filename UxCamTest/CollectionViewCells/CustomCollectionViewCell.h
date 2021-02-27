@@ -14,8 +14,6 @@
 
 - (void) configureWithWeather :(WeeklyWeather *)weather;
 
-@property (nonatomic) NSDictionary * imageMap;
-
 @property (nonatomic, strong) UILabel *dateLabel;
 
 @property (nonatomic, strong) UILabel *timeLabel;

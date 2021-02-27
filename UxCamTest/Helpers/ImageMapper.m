@@ -2,7 +2,7 @@
 //  ImageMapper.m
 //  UxCamTest
 //
-//  Created by Javra Software on 2/26/21.
+//  Created by Ravi Bastola on 2/26/21.
 //
 
 #import "ImageMapper.h"
@@ -34,6 +34,12 @@
         };
     }
     return _imageMap;
+}
+
+#pragma mark- Returns the name of the image from the dictonary above. 
+
++ (NSString *)getImageOfName:(NSString *)name {
+    return [[ImageMapper imageMap] valueForKey:name];
 }
 
 @end

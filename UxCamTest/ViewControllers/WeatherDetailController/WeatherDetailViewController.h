@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NetworkManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSString * cityName;
 
 -(id) initWithCityName: (NSString *) cityName;
+
+@property (nonatomic, strong) NetworkManager *manager;
 
 @end
 
