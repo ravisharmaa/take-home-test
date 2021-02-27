@@ -30,10 +30,11 @@
         [self.layer setBorderWidth:0.5];
         [self.layer setCornerRadius:12];
         
-        UIImage *systemImage  = [[UIImage systemImageNamed:MAGNIFYING_GLASS] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage *systemImage  = [[UIImage systemImageNamed:MAGNIFYING_GLASS] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         UIImageView *imageView  = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
         imageView.image = systemImage;
+        [imageView setTintColor:UIColor.grayColor];
         [self setLeftView:imageView];
         [self setLeftViewMode:UITextFieldViewModeAlways];
         [self getCountriesData];
@@ -77,11 +78,20 @@
 - (void) filterWith: (NSString *) text {
     self.filteredArray = [[NSMutableArray alloc] init];
     
+    NSLog(@"%@", text.lowercaseString);
+    
     for (Country *item in self.citiesArray) {
+        NSLog(@"%@", item.name);
         if ([item.name.lowercaseString containsString:text.lowercaseString]) {
+            NSLog(@"item exists");
             [self.filteredArray addObject:item];
+        } else if ([item.name.lowercaseString isEqualToString:text]) {
+            NSLog(@"item with same name exists");
+            [self.filteredArray addObject:item];
+            //[self.searchResultsTableView reloadData];
         } else {
-            //[self.filteredArray removeAllObjects];
+            NSLog(@"got nothing matching");
+            //[self.searchResultsTableView reloadData];
         }
     }
 }
@@ -171,7 +181,7 @@
                 });
             }
             
-           
+            
             
         }] resume];
     }
@@ -184,9 +194,9 @@
     
     tableHeight = self.searchResultsTableView.contentSize.height ;
     
-//    if (tableHeight < self.searchResultsTableView.contentSize.height) {
-//        tableHeight -= 10;
-//    }
+    //    if (tableHeight < self.searchResultsTableView.contentSize.height) {
+    //        tableHeight -= 10;
+    //    }
     
     CGRect tableFrame;
     

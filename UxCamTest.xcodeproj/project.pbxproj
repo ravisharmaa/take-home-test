@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,8 +16,6 @@
 		D559FCC825E494E400047031 /* LandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D559FCC725E494E400047031 /* LandingViewController.m */; };
 		D57A6EE925E6A62D00C75E8F /* WeatherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A6EE825E6A62D00C75E8F /* WeatherDetailViewController.m */; };
 		D57A6EEE25E7AD1D00C75E8F /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A6EED25E7AD1D00C75E8F /* Country.m */; };
-		D57D05AF25E9FA6400945108 /* JGProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57D05AC25E9FA5500945108 /* JGProgressHUD.framework */; };
-		D57D05B025E9FA6400945108 /* JGProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D57D05AC25E9FA5500945108 /* JGProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D582AC3125E8963D00FBFAEA /* WeeklyWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC3025E8963D00FBFAEA /* WeeklyWeather.m */; };
 		D582AC3625E8A9A300FBFAEA /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC3525E8A9A300FBFAEA /* Section.m */; };
 		D582AC3C25E8AA5200FBFAEA /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC3B25E8AA5200FBFAEA /* CustomCollectionViewCell.m */; };
@@ -29,6 +27,7 @@
 		D582AC9525E9D9A200FBFAEA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D582AC9325E9D9A200FBFAEA /* Reachability.m */; };
 		D5AD2DAA25E4CFA600D7B7D0 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DA925E4CFA600D7B7D0 /* NetworkManager.m */; };
 		D5AD2DBC25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AD2DBB25E4FEE400D7B7D0 /* UIViewController+AlertExtension.m */; };
+		D5BEF3D425EA53BA00B7A07D /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = D5BEF3D325EA53BA00B7A07D /* JGProgressHUD */; };
 		D5BEFB1C25E68D58001D9FF5 /* TextFieldAndButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BEFB1B25E68D58001D9FF5 /* TextFieldAndButtonView.m */; };
 /* End PBXBuildFile section */
 
@@ -47,20 +46,6 @@
 			remoteGlobalIDString = 6BABF9A31F7A6133005E783F;
 			remoteInfo = "JGProgressHUD-tvOS";
 		};
-		D57D05AB25E9FA5500945108 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6BF7DC5A1AEFCFD9000A0AE0;
-			remoteInfo = "JGProgressHUD-iOS";
-		};
-		D57D05AD25E9FA5500945108 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6BABF9A31F7A6133005E783F;
-			remoteInfo = "JGProgressHUD-tvOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,7 +55,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D57D05B025E9FA6400945108 /* JGProgressHUD.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,7 +80,6 @@
 		D57A6EEC25E7AD1D00C75E8F /* Country.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
 		D57A6EED25E7AD1D00C75E8F /* Country.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
 		D57D059B25E9FA4D00945108 /* JGProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JGProgressHUD.xcodeproj; path = "../../Downloads/JGProgressHUD-master/JGProgressHUD.xcodeproj"; sourceTree = "<group>"; };
-		D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JGProgressHUD.xcodeproj; path = "../../Downloads/JGProgressHUD-master/JGProgressHUD.xcodeproj"; sourceTree = "<group>"; };
 		D582AC2F25E8963D00FBFAEA /* WeeklyWeather.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeeklyWeather.h; sourceTree = "<group>"; };
 		D582AC3025E8963D00FBFAEA /* WeeklyWeather.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeeklyWeather.m; sourceTree = "<group>"; };
 		D582AC3425E8A9A300FBFAEA /* Section.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
@@ -128,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D57D05AF25E9FA6400945108 /* JGProgressHUD.framework in Frameworks */,
+				D5BEF3D425EA53BA00B7A07D /* JGProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +132,6 @@
 		D559FC9925E3EA2200047031 = {
 			isa = PBXGroup;
 			children = (
-				D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */,
 				D582AC8425E96CA300FBFAEA /* Readme.md */,
 				D559FCA425E3EA2300047031 /* UxCamTest */,
 				D559FCA325E3EA2300047031 /* Products */,
@@ -247,15 +229,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D57D05A725E9FA5500945108 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D57D05AC25E9FA5500945108 /* JGProgressHUD.framework */,
-				D57D05AE25E9FA5500945108 /* JGProgressHUD.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		D582AC3325E8A99400FBFAEA /* Sections */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +320,9 @@
 			dependencies = (
 			);
 			name = UxCamTest;
+			packageProductDependencies = (
+				D5BEF3D325EA53BA00B7A07D /* JGProgressHUD */,
+			);
 			productName = UxCamTest;
 			productReference = D559FCA225E3EA2300047031 /* UxCamTest.app */;
 			productType = "com.apple.product-type.application";
@@ -373,13 +349,12 @@
 				Base,
 			);
 			mainGroup = D559FC9925E3EA2200047031;
+			packageReferences = (
+				D5BEF3D225EA53BA00B7A07D /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+			);
 			productRefGroup = D559FCA325E3EA2300047031 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = D57D05A725E9FA5500945108 /* Products */;
-					ProjectRef = D57D05A625E9FA5500945108 /* JGProgressHUD.xcodeproj */;
-				},
 				{
 					ProductGroup = D57D059C25E9FA4D00945108 /* Products */;
 					ProjectRef = D57D059B25E9FA4D00945108 /* JGProgressHUD.xcodeproj */;
@@ -405,20 +380,6 @@
 			fileType = wrapper.framework;
 			path = JGProgressHUD.framework;
 			remoteRef = D57D05A225E9FA4D00945108 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D57D05AC25E9FA5500945108 /* JGProgressHUD.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = JGProgressHUD.framework;
-			remoteRef = D57D05AB25E9FA5500945108 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D57D05AE25E9FA5500945108 /* JGProgressHUD.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = JGProgressHUD.framework;
-			remoteRef = D57D05AD25E9FA5500945108 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -646,6 +607,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D5BEF3D225EA53BA00B7A07D /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D5BEF3D325EA53BA00B7A07D /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5BEF3D225EA53BA00B7A07D /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D559FC9A25E3EA2200047031 /* Project object */;
 }

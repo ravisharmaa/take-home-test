@@ -19,6 +19,9 @@ I have used Xcode Version 12.2 (12B45b) to build and run this project hence Xcod
 1. [JG Progress HUD](https://github.com/JonasGessner/JGProgressHUD)
 2. [Reachibility](https://github.com/tonymillion/Reachability)
 
+### Testing Devices
+This app can be tested on iPhone and only Potrait mode is supported.
+
 ### Extras
 
 I wanted this task to have a good appeal of ux hence it took me more time  to create a suggestion table view <br/> 
