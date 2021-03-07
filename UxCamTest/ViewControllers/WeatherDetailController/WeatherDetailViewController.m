@@ -51,7 +51,7 @@
 
 @property SingleForecast *foreCast;
 
-@property NSMutableArray * weatherDataArray;
+@property NSMutableArray<WeeklyWeather *> *weatherDataArray;
 @end
 
 @implementation WeatherDetailViewController

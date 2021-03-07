@@ -14,7 +14,7 @@
 
 @property NSMutableArray *citiesArray;
 @property (nonatomic, strong) NetworkManager *manager;
-@property NSMutableArray *filteredArray;
+@property NSMutableArray<Country *> *filteredArray;
 
 @end
 
@@ -64,10 +64,10 @@
 }
 
 - (void) textFieldDidChange {
-    
     if (![self.text isEqualToString:@"" ]){
         [self.filteredArray removeAllObjects];
         [self filterWith:self.text];
+        [self.searchResultsTableView reloadData];
         [self updateTableView];
         [self.searchResultsTableView setHidden:NO];
     } else {
@@ -76,6 +76,8 @@
 }
 
 - (void) filterWith: (NSString *) text {
+    
+    
     self.filteredArray = [[NSMutableArray alloc] init];
     
     NSLog(@"%@", text.lowercaseString);
@@ -85,13 +87,10 @@
         if ([item.name.lowercaseString containsString:text.lowercaseString]) {
             NSLog(@"item exists");
             [self.filteredArray addObject:item];
-        } else if ([item.name.lowercaseString isEqualToString:text]) {
-            NSLog(@"item with same name exists");
-            [self.filteredArray addObject:item];
-            //[self.searchResultsTableView reloadData];
         } else {
             NSLog(@"got nothing matching");
-            //[self.searchResultsTableView reloadData];
+//            [self.filteredArray removeAllObjects];
+//            [self.searchResultsTableView reloadData];
         }
     }
 }
@@ -192,7 +191,7 @@
     
     CGFloat tableHeight;
     
-    tableHeight = self.searchResultsTableView.contentSize.height ;
+    tableHeight = self.searchResultsTableView.contentSize.height;
     
     //    if (tableHeight < self.searchResultsTableView.contentSize.height) {
     //        tableHeight -= 10;
@@ -206,7 +205,7 @@
     
     tableFrame.origin.x += 2;
     
-    tableFrame.origin.y =+ self.frame.size.height + 70;
+    tableFrame.origin.y =+ self.frame.size.height + 75;
     
     [UIView animateWithDuration:0.2 animations:^{
         self.searchResultsTableView.frame = tableFrame;
